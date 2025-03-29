@@ -488,5 +488,28 @@
             showPage('home-page');
         });
     </script>
+    <!-- Scroll tracking (add before </body>) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 50 && !sessionStorage.getItem('scrolled50')) {
+        gtag('event', 'scroll_50_percent');
+        sessionStorage.setItem('scrolled50', 'true');
+      }
+    });
+  });
+</script>
+
+<!-- Button click (inline) -->
+<button onclick="gtag('event', 'signup_attempt', { event_category: 'Conversion' });">
+  Sign Up
+</button>
+
+<!-- Form submission (inline) -->
+<form onsubmit="gtag('event', 'generate_lead', { event_category: 'Conversion' });">
+  <input type="email" placeholder="Email">
+  <button type="submit">Submit</button>
+</form>
 </body>
 </html>
